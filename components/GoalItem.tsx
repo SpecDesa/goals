@@ -6,10 +6,14 @@ import {
   ListRenderItemInfo,
 } from "react-native";
 import _ from "lodash";
-export const GoalItem = (itemData: ListRenderItemInfo<any>) => {
+
+
+// export const GoalItem = (itemData: ListRenderItemInfo<any>) => {
+export const GoalItem = (props: any) => {
   return (
     <View style={styles.goalItem}>
-      <Text style={styles.goalText}>{itemData.item.text}</Text>
+      <Text style={styles.goalText}>{props.text}</Text>
+      {/* <Text style={styles.goalText}>{itemData.item.text}</Text> */}
     </View>
   );
 };

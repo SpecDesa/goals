@@ -1,7 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, FlatList } from "react-native";
 import { useState } from "react";
 import _ from 'lodash'
+import { GoalItem } from "./components/GoalItem";
+import { GoalInput } from "./components/GoalInput";
 
 export default function App() {
   const [enteredGoalText, setEnterGoalText] = useState(''); 
@@ -27,19 +29,15 @@ export default function App() {
   return (
     // Default take only space it needs, so fix with flex: 1, and put flex on childrens.
     <View style={styles.appContainer}> 
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} placeholder="Input course goals" onChangeText={goalInputHandler} value={enteredGoalText}/>
-        <Button title="Add goal" onPress={addGoalHandler}/>
-      </View>
+      <GoalInput addGoalHandler={addGoalHandler} enteredGoalText={enteredGoalText} goalInputHandler={goalInputHandler} />
+      
       <View style={styles.goalsContainer}>
-        {/* <ScrollView> // Great for limited amount of data like article
-          {goals.map(goal => <View style={styles.goalItem} key={goal}><Text style={styles.goalText}>{goal}</Text></View>)}
-        </ScrollView> */}
         <FlatList // Better scroll. Its lazy loading.
           data={goals}
           renderItem={(itemData) => {
             itemData.index;
-              return <View style={styles.goalItem}><Text style={styles.goalText}>{itemData.item.text}</Text></View>
+              return <GoalItem text={itemData.item.text}/>
+              // return <View style={styles.goalItem}><Text style={styles.goalText}>{itemData.item.text}</Text></View>
               }
             }
             // keyExtractor={item => item.id} // If no real id, can set this. Automatically 
